@@ -1,0 +1,10 @@
+﻿<jxwpfToolkit:BaseWindow x:Class="TestApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:jxwpfToolkit="clr-namespace:JXWPFToolkit;assembly=JXWPFToolkit"
+        Title="MainWindow" Height="350" Width="525">
+	
+    <Grid Background="White">
+        
+    </Grid>
+</jxwpfToolkit:BaseWindow>
