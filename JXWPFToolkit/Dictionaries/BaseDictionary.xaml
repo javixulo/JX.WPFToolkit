@@ -56,6 +56,7 @@
 		<Setter Property="BorderThickness" Value="1" />
 		<Setter Property="Height" Value="25" />
 		<Setter Property="Padding" Value="7,0,0,0" />
+		<Setter Property="Margin" Value="10" />
 
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 
@@ -203,7 +204,8 @@
 		<Setter Property="Height" Value="25" />
 		<Setter Property="Padding" Value="7,0,0,0" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
-
+		<Setter Property="Margin" Value="10" />
+		
 		<Style.Triggers>
 			<Trigger Property="IsFocused" Value="True">
 				<Setter Property="Background" Value="{StaticResource BrushFieldFocusedBackground}"/>
@@ -217,7 +219,8 @@
 		<Setter Property="Height" Value="25" />
 		<Setter Property="Padding" Value="7,0,0,0" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
-
+		<Setter Property="Margin" Value="10" />
+		
 		<Style.Triggers>
 			<Trigger Property="IsFocused" Value="True">
 				<Setter Property="Background" Value="{StaticResource BrushFieldFocusedBackground}"/>
@@ -234,7 +237,8 @@
 		<Setter Property="TimeFormatString" Value="dd/MM/yyyy" />
 		<Setter Property="FormatString" Value="dd/MM/yyyy" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
-
+		<Setter Property="Margin" Value="10" />
+		
 		<Style.Triggers>
 			<Trigger Property="IsFocused" Value="True">
 				<Setter Property="Background" Value="{StaticResource BrushFieldFocusedBackground}"/>
