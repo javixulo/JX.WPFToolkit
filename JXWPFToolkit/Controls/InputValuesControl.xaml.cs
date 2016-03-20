@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using JXWPFToolkit.Helpers;
 using JXWPFToolkit.Validations;
 using Xceed.Wpf.Toolkit;
@@ -86,16 +87,53 @@ namespace JXWPFToolkit.Controls
 			{
 				control = new IntegerUpDown { Value = item.Value == null ? 0 : Convert.ToInt32(item.Value), FormatString = item.Format };
 				((IntegerUpDown)control).ValueChanged += OnValueChanged;
+				
+				if (item.Required)
+				{
+					Binding binding = new Binding("Value");
+					binding.Mode = BindingMode.OneWayToSource;
+					binding.RelativeSource = new RelativeSource(RelativeSourceMode.Self);
+					binding.UpdateSourceTrigger = UpdateSourceTrigger.LostFocus;
+					binding.NotifyOnValidationError = true;
+					binding.NotifyOnSourceUpdated = true;
+					binding.NotifyOnTargetUpdated = true;
+					binding.ValidationRules.Add(new RequiredFieldValidationRule());
+				}
+
 			}
 			else if (item.DataType == typeof(Int64))
 			{
 				control = new LongUpDown { Value = item.Value == null ? 0 : Convert.ToInt64(item.Value), FormatString = item.Format };
 				((LongUpDown)control).ValueChanged += OnValueChanged;
+
+				if (item.Required)
+				{
+					Binding binding = new Binding("Value");
+					binding.Mode = BindingMode.OneWayToSource;
+					binding.RelativeSource = new RelativeSource(RelativeSourceMode.Self);
+					binding.UpdateSourceTrigger = UpdateSourceTrigger.LostFocus;
+					binding.NotifyOnValidationError = true;
+					binding.NotifyOnSourceUpdated = true;
+					binding.NotifyOnTargetUpdated = true;
+					binding.ValidationRules.Add(new RequiredFieldValidationRule());
+				}
 			}
 			else if (item.DataType == typeof(double))
 			{
 				control = new DoubleUpDown { Value = item.Value == null ? 0 : (double)item.Value };
 				((DoubleUpDown)control).ValueChanged += OnValueChanged;
+
+				if (item.Required)
+				{
+					Binding binding = new Binding("Value");
+					binding.Mode = BindingMode.OneWayToSource;
+					binding.RelativeSource = new RelativeSource(RelativeSourceMode.Self);
+					binding.UpdateSourceTrigger = UpdateSourceTrigger.LostFocus;
+					binding.NotifyOnValidationError = true;
+					binding.NotifyOnSourceUpdated = true;
+					binding.NotifyOnTargetUpdated = true;
+					binding.ValidationRules.Add(new RequiredFieldValidationRule());
+				}
 			}
 				//else if (item.DataType == typeof (decimal))
 				//{
@@ -106,11 +144,19 @@ namespace JXWPFToolkit.Controls
 			{
 				control = new DateTimePicker { Value = item.Value == null ? DateTime.Today : (DateTime)item.Value, Format = DateTimeFormat.Custom, TimeFormatString = item.Format, FormatString = item.Format };
 				((DateTimePicker)control).ValueChanged += OnValueChanged;
-			}
-			else if (item.DataType == typeof (DateTime))
-			{
-				control = new TextBox { Text = item.Value == null ? string.Empty : ((DateTime)item.Value).ToString(item.Format) };
-				control.LostFocus += OnValueChanged;
+
+				if (item.Required)
+				{
+					Binding binding = new Binding("Value");
+					binding.Mode = BindingMode.OneWayToSource;
+					binding.RelativeSource = new RelativeSource(RelativeSourceMode.Self);
+					binding.UpdateSourceTrigger = UpdateSourceTrigger.LostFocus;
+					binding.NotifyOnValidationError = true;
+					binding.NotifyOnSourceUpdated = true;
+					binding.NotifyOnTargetUpdated = true;
+					binding.ValidationRules.Add(new RequiredFieldValidationRule());
+				}
+
 			}
 			else if (item.DataType == typeof (IEnumerable<ComboBoxItem>))
 			{
@@ -126,6 +172,17 @@ namespace JXWPFToolkit.Controls
 				if (item.Required)
 				{
 					control.Style = (Style)Resources["RequiredStyle"];
+
+					Binding binding = new Binding("Text");
+					binding.Mode = BindingMode.OneWayToSource;
+					binding.RelativeSource = new RelativeSource(RelativeSourceMode.Self);
+					binding.UpdateSourceTrigger = UpdateSourceTrigger.LostFocus;
+					binding.NotifyOnValidationError = true;
+					binding.NotifyOnSourceUpdated = true;
+					binding.NotifyOnTargetUpdated= true;
+					binding.ValidationRules.Add(new RequiredFieldValidationRule());
+
+					control.SetBinding(TextBox.TextProperty, binding);
 				}
 			}
 

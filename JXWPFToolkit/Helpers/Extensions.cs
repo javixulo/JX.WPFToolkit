@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
 
 namespace JXWPFToolkit.Helpers
@@ -26,6 +27,11 @@ namespace JXWPFToolkit.Helpers
 					yield return grandChild;
 				}
 			}
+		}
+
+		public static bool IsValid(this DependencyObject obj)
+		{
+			return !Validation.GetHasError(obj) && !obj.Descendants<DependencyObject>().Any(Validation.GetHasError);
 		}
 
 		public static bool EqualsInvariant(this string source, string value1, params string[] values)

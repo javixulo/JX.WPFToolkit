@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
 using JXWPFToolkit.Controls;
+using JXWPFToolkit.Helpers;
 
 namespace JXWPFToolkit.Windows
 {
@@ -42,6 +43,12 @@ namespace JXWPFToolkit.Windows
 
 		private void OnSaveClicked(object sender, EventArgs e)
 		{
+			if (!InputValues.IsValid())
+			{
+				MessageBox.Show("Hay errores de validación. Soluciónelos para poder guardar.", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+				return;
+			}
+
 			if (InputFinished == null)
 			{
 				return;
@@ -82,10 +89,7 @@ namespace JXWPFToolkit.Windows
 				Width = aux;
 			}
 		}
-
-
 	}
-
 
 	public enum WindowSize
 	{

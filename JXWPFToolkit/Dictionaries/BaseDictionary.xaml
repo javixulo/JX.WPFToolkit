@@ -12,6 +12,7 @@
 	<Color x:Key="DetailColor">#FF4D75FF</Color>
 	<Color x:Key="DetailColorLight">#FFD3EDFF</Color>
 
+	<SolidColorBrush x:Key="BrushValidationErrorBorder" Color="DarkRed"/>
 	<SolidColorBrush x:Key="BrushFieldBorder" Color="#cccccc"/>
 	<SolidColorBrush x:Key="BrushFieldFocusedBackground" Color="{StaticResource DetailColorLight}"/>
 	<SolidColorBrush x:Key="MainColorBrush" Color="{StaticResource MainColor}"/>
@@ -65,6 +66,10 @@
 			<Trigger Property="IsReadOnly" Value="True">
 				<Setter Property="Background" Value="#FFF0F0F0"/>
 			</Trigger>
+
+			<Trigger Property="Validation.HasError" Value="true">
+				<Setter Property="BorderBrush" Value="{StaticResource BrushValidationErrorBorder}"/>
+			</Trigger>
 		</Style.Triggers>
 	</Style>
 
@@ -77,10 +82,11 @@
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 	</Style>
 
-	<Style BasedOn="{StaticResource StyleTextBox}" TargetType="TextBox" x:Key="RequiredStyle" >
+	<Style TargetType="Control" x:Key="RequiredStyle" >
 		<Style.Triggers>
-			<Trigger Property="Text" Value="">
-				<Setter Property="BorderBrush" Value="DarkRed"/>
+			
+			<Trigger Property="Validation.HasError" Value="true">
+				<Setter Property="BorderBrush" Value="{StaticResource BrushValidationErrorBorder}"/>
 			</Trigger>
 		</Style.Triggers>
 	</Style>
@@ -94,10 +100,13 @@
 		<Setter Property="Padding" Value="7,0,0,0" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 		<Setter Property="Margin" Value="10" />
-		
+
 		<Style.Triggers>
 			<Trigger Property="IsFocused" Value="True">
 				<Setter Property="Background" Value="{StaticResource BrushFieldFocusedBackground}"/>
+			</Trigger>
+			<Trigger Property="Validation.HasError" Value="true">
+				<Setter Property="BorderBrush" Value="{StaticResource BrushValidationErrorBorder}"/>
 			</Trigger>
 		</Style.Triggers>
 	</Style>
@@ -109,10 +118,13 @@
 		<Setter Property="Padding" Value="7,0,0,0" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 		<Setter Property="Margin" Value="10" />
-		
+
 		<Style.Triggers>
 			<Trigger Property="IsFocused" Value="True">
 				<Setter Property="Background" Value="{StaticResource BrushFieldFocusedBackground}"/>
+			</Trigger>
+			<Trigger Property="Validation.HasError" Value="true">
+				<Setter Property="BorderBrush" Value="{StaticResource BrushValidationErrorBorder}"/>
 			</Trigger>
 		</Style.Triggers>
 	</Style>
@@ -127,10 +139,13 @@
 		<Setter Property="FormatString" Value="dd/MM/yyyy" />
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 		<Setter Property="Margin" Value="10" />
-		
+
 		<Style.Triggers>
 			<Trigger Property="IsFocused" Value="True">
 				<Setter Property="Background" Value="{StaticResource BrushFieldFocusedBackground}"/>
+			</Trigger>
+			<Trigger Property="Validation.HasError" Value="true">
+				<Setter Property="BorderBrush" Value="{StaticResource BrushValidationErrorBorder}"/>
 			</Trigger>
 		</Style.Triggers>
 

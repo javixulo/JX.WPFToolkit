@@ -17,9 +17,7 @@
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
-		<ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto" Margin="10">
-			<controls:InputValuesControl x:Name="InputValues"  />
-		</ScrollViewer>
+		<controls:InputValuesControl x:Name="InputValues" Margin="10" />
 
 		<StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
 			<Button Content="Guardar" Width="50" IsDefault="True" Click="OnSaveClicked"/>

@@ -9,7 +9,7 @@ namespace JXWPFToolkit.Validations
 		{
 			string stringValue = value is string ? (string) value : value.ToString();
 
-			if (!string.IsNullOrEmpty(stringValue))
+			if (string.IsNullOrEmpty(stringValue))
 				return new ValidationResult(false, "Campo obligatorio");
 			return ValidationResult.ValidResult;
 		}
