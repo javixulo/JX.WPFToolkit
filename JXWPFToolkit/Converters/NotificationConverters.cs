@@ -3,9 +3,9 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
-using JXWPFToolkit.Controls.NotificationPanel.NotificationCards;
+using JX.WPFToolkit.Controls.NotificationPanel.NotificationCards;
 
-namespace JXWPFToolkit.Converters
+namespace JX.WPFToolkit.Converters
 {
 	public class TypeToImageConverter : IValueConverter
 	{
@@ -14,7 +14,7 @@ namespace JXWPFToolkit.Converters
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			if (_resources == null)
-				_resources = new ResourceDictionary { Source = new Uri("/JXWPFToolkit;component/Dictionaries/NotificationPanelDictionary.xaml", UriKind.RelativeOrAbsolute) };
+				_resources = new ResourceDictionary { Source = new Uri("/JX.WPFToolkit;component/Dictionaries/NotificationPanelDictionary.xaml", UriKind.RelativeOrAbsolute) };
 
 			NotificationCardBase.CardType type;
 			Enum.TryParse(value.ToString(), true, out type);

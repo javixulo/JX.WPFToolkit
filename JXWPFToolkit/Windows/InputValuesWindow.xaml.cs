@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
-using JXWPFToolkit.Controls;
-using JXWPFToolkit.Helpers;
+using JX.WPFToolkit.Controls;
+using JX.WPFToolkit.Helpers;
 
-namespace JXWPFToolkit.Windows
+namespace JX.WPFToolkit.Windows
 {
 	/// <summary>
 	/// Generic window used for asking the user to input some values

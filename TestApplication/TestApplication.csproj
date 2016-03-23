@@ -98,9 +98,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JXWPFToolkit\JXWPFToolkit.csproj">
+    <ProjectReference Include="..\JXWPFToolkit\JX.WPFToolkit.csproj">
       <Project>{a2326a27-6db7-4438-927c-98f724677a1c}</Project>
-      <Name>JXWPFToolkit</Name>
+      <Name>JX.WPFToolkit</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

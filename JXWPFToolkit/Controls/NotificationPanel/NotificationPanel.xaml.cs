@@ -1,10 +1,8 @@
-﻿using System.Linq;
-using System.Windows;
-using System.Windows.Input;
-using JXWPFToolkit.Controls.NotificationPanel.NotificationCards;
-using JXWPFToolkit.Helpers;
+﻿using System.Windows;
+using JX.WPFToolkit.Controls.NotificationPanel.NotificationCards;
+using JX.WPFToolkit.Helpers;
 
-namespace JXWPFToolkit.Controls.NotificationPanel
+namespace JX.WPFToolkit.Controls.NotificationPanel
 {
 	public partial class NotificationPanel
 	{

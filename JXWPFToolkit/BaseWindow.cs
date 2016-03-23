@@ -18,7 +18,7 @@ using HorizontalAlignment = System.Windows.HorizontalAlignment;
 using Orientation = System.Windows.Controls.Orientation;
 using Panel = System.Windows.Controls.Panel;
 
-namespace JXWPFToolkit
+namespace JX.WPFToolkit
 {
 	public class BaseWindow : Window
 	{
@@ -277,7 +277,7 @@ namespace JXWPFToolkit
 
 		private void InitializeComponent()
 		{
-			_resources = new ResourceDictionary { Source = new Uri("/JXWPFToolkit;component/Dictionaries/BaseDictionary.xaml", UriKind.RelativeOrAbsolute) };
+			_resources = new ResourceDictionary { Source = new Uri("/JX.WPFToolkit;component/Dictionaries/BaseDictionary.xaml", UriKind.RelativeOrAbsolute) };
 
 			var template = new ControlTemplate();
 

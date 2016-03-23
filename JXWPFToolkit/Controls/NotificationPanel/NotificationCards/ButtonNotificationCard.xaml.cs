@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
 
-namespace JXWPFToolkit.Controls.NotificationPanel.NotificationCards
+namespace JX.WPFToolkit.Controls.NotificationPanel.NotificationCards
 {
 	public partial class ButtonNotificationCard : NotificationCardBase
 	{

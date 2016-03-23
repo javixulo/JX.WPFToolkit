@@ -1,7 +1,6 @@
-﻿using System.Timers;
-using System.Windows;
+﻿using System.Windows;
 
-namespace JXWPFToolkit.Controls.NotificationPanel.NotificationCards
+namespace JX.WPFToolkit.Controls.NotificationPanel.NotificationCards
 {
 	public partial class NotificationCard : NotificationCardBase
 	{

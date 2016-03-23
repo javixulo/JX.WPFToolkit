@@ -1,8 +1,8 @@
-﻿<jxwpfToolkit:BaseWindow x:Class="TestApplication.MainWindow"
+﻿<wpfToolkit:BaseWindow x:Class="TestApplication.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:jxwpfToolkit="clr-namespace:JXWPFToolkit;assembly=JXWPFToolkit"
-        xmlns:notificationPanel="clr-namespace:JXWPFToolkit.Controls.NotificationPanel;assembly=JXWPFToolkit"
+        xmlns:notificationPanel="clr-namespace:JX.WPFToolkit.Controls.NotificationPanel;assembly=JX.WPFToolkit"
+        xmlns:wpfToolkit="clr-namespace:JX.WPFToolkit;assembly=JX.WPFToolkit"
         Title="Sample usage" Height="500" Width="600">
 
 	<Grid Background="White">
@@ -31,4 +31,4 @@
 
 
 	</Grid>
-</jxwpfToolkit:BaseWindow>
+</wpfToolkit:BaseWindow>

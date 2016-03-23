@@ -1,9 +1,8 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Linq;
 using System.Windows;
 
-namespace JXWPFToolkit.Controls.NotificationPanel
+namespace JX.WPFToolkit.Controls.NotificationPanel
 {
 	public class NotificationPanelDataContext : INotifyPropertyChanged
 	{

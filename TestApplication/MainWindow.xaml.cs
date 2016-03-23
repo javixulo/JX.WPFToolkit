@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
-using JXWPFToolkit.Controls;
-using JXWPFToolkit.Controls.NotificationPanel.NotificationCards;
-using JXWPFToolkit.Windows;
+using JX.WPFToolkit.Controls;
+using JX.WPFToolkit.Controls.NotificationPanel.NotificationCards;
+using JX.WPFToolkit.Windows;
 
 namespace TestApplication
 {

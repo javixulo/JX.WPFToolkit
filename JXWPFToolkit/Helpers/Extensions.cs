@@ -5,7 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace JXWPFToolkit.Helpers
+namespace JX.WPFToolkit.Helpers
 {
 	public static class Extensions
 	{

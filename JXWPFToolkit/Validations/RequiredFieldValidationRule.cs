@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using System.Windows.Controls;
 
-namespace JXWPFToolkit.Validations
+namespace JX.WPFToolkit.Validations
 {
 	public class RequiredFieldValidationRule : ValidationRule
 	{

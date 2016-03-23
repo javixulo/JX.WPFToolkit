@@ -1,11 +1,10 @@
 ﻿using System.ComponentModel;
-using System.Linq;
 using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace JXWPFToolkit.Controls.NotificationPanel.NotificationCards
+namespace JX.WPFToolkit.Controls.NotificationPanel.NotificationCards
 {
 	public abstract class NotificationCardBase : UserControl, INotifyPropertyChanged
 	{

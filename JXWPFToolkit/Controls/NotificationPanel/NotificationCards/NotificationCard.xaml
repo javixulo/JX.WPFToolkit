@@ -1,15 +1,15 @@
-﻿<notificationCards:NotificationCardBase x:Class="JXWPFToolkit.Controls.NotificationPanel.NotificationCards.NotificationCard"
+﻿<notificationCards1:NotificationCardBase x:Class="JX.WPFToolkit.Controls.NotificationPanel.NotificationCards.NotificationCard"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:notificationCards="clr-namespace:JXWPFToolkit.Controls.NotificationPanel.NotificationCards"
+										xmlns:notificationCards1="clr-namespace:JX.WPFToolkit.Controls.NotificationPanel.NotificationCards"
              mc:Ignorable="d"
 			 DataContext="{Binding RelativeSource={RelativeSource Self}}" >
 
-	<notificationCards:NotificationCardBase.Resources>
+	<notificationCards1:NotificationCardBase.Resources>
 		<ResourceDictionary Source="../../../Dictionaries/NotificationPanelDictionary.xaml" />
-	</notificationCards:NotificationCardBase.Resources>
+	</notificationCards1:NotificationCardBase.Resources>
 
 	<Grid Margin="2">
 		<Grid.ColumnDefinitions>
@@ -26,4 +26,4 @@
 		<Button Grid.Column="2" VerticalAlignment="Top" Content="X" Click="OnCardDeleted" Style="{StaticResource CloseButtonStyle}" />
 	</Grid>
 
-</notificationCards:NotificationCardBase>
+</notificationCards1:NotificationCardBase>

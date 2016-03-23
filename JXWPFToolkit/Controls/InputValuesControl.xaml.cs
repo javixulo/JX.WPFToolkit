@@ -4,11 +4,11 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
-using JXWPFToolkit.Helpers;
-using JXWPFToolkit.Validations;
+using JX.WPFToolkit.Helpers;
+using JX.WPFToolkit.Validations;
 using Xceed.Wpf.Toolkit;
 
-namespace JXWPFToolkit.Controls
+namespace JX.WPFToolkit.Controls
 {
 	public partial class InputValuesControl
 	{
