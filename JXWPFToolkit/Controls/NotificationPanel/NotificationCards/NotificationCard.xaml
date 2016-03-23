@@ -1,18 +1,15 @@
-﻿<UserControl x:Class="JXWPFToolkit.Controls.NotificationPanel.NotificationCard"
+﻿<notificationCards:NotificationCardBase x:Class="JXWPFToolkit.Controls.NotificationPanel.NotificationCards.NotificationCard"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:notificationCards="clr-namespace:JXWPFToolkit.Controls.NotificationPanel.NotificationCards"
              mc:Ignorable="d"
-			 Height="45" MaxWidth="200"
-			 Width="200"
-			 DataContext="{Binding RelativeSource={RelativeSource Self}}"
-			 Background="White"
-			 BorderBrush="DimGray" BorderThickness="1">
+			 DataContext="{Binding RelativeSource={RelativeSource Self}}" >
 
-	<UserControl.Resources>
-		<ResourceDictionary Source="../../Dictionaries/NotificationPanelDictionary.xaml" />
-	</UserControl.Resources>
+	<notificationCards:NotificationCardBase.Resources>
+		<ResourceDictionary Source="../../../Dictionaries/NotificationPanelDictionary.xaml" />
+	</notificationCards:NotificationCardBase.Resources>
 
 	<Grid Margin="2">
 		<Grid.ColumnDefinitions>
@@ -26,7 +23,7 @@
 				   Visibility="{Binding Type, Converter={StaticResource TypeToVisibilityConverter}}" Margin="3"/>
 
 		<TextBlock Grid.Column="1" Text="{Binding CardContent}" ToolTip="{Binding CardContent}" Background="{Binding TemplatedParent}" />
-		<Button Grid.Column="2" VerticalAlignment="Top" Content="X" Click="OnDeleteButtonClick" Style="{StaticResource CloseButtonStyle}" />
+		<Button Grid.Column="2" VerticalAlignment="Top" Content="X" Click="OnCardDeleted" Style="{StaticResource CloseButtonStyle}" />
 	</Grid>
 
-</UserControl>
+</notificationCards:NotificationCardBase>

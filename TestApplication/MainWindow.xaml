@@ -11,17 +11,24 @@
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
 			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
 			<RowDefinition Height="Auto"/>
 		</Grid.RowDefinitions>
 
 		<Button Grid.Row="0" Content="Input Values Window" Click="InputValuesWindowClick"/>
 
-		<notificationPanel:NotificationPanel Grid.Row="2" x:Name="NotificationPanel"/>
-
-		<StackPanel Grid.Row="3" Orientation="Horizontal">
-			<Button Content="Add Card" Click="OnAddCardClick"/>
-			<Button Content="Add Temporary Card" Click="OnAddTemporaryCardClick"/>
+		<StackPanel Grid.Row="2">
+		<Label Content="Notification Panel actions:"/>
+			<StackPanel  Orientation="Horizontal">
+				<Button Content="Add Card" Click="OnAddCardClick"/>
+				<Button Content="Add Temporary Card" Click="OnAddTemporaryCardClick"/>
+				<Button Content="Add Button Card" Click="OnAddButtonCardClick"/>
+			</StackPanel>
 		</StackPanel>
+		<Grid Grid.Row="3" Height="auto"></Grid>
+
+		<notificationPanel:NotificationPanel Grid.Row="4"  x:Name="NotificationPanel"/>
+
 
 	</Grid>
 </jxwpfToolkit:BaseWindow>

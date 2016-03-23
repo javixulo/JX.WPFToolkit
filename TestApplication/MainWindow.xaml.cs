@@ -4,7 +4,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using JXWPFToolkit.Controls;
-using JXWPFToolkit.Controls.NotificationPanel;
+using JXWPFToolkit.Controls.NotificationPanel.NotificationCards;
 using JXWPFToolkit.Windows;
 
 namespace TestApplication
@@ -108,7 +108,7 @@ namespace TestApplication
 
 		private void OnAddCardClick(object sender, RoutedEventArgs e)
 		{
-			NotificationCard.CardType type = (NotificationCard.CardType)(_cardNumber % 4);
+			var type = (NotificationCardBase.CardType)(_cardNumber % 4);
 			if (_cardNumber % 5 == 0)
 				NotificationPanel.AddTextCard("This is the card with a veeery long text\nI hope you like it and I hope it looks correct: " + _cardNumber++, type);
 			else
@@ -117,8 +117,14 @@ namespace TestApplication
 
 		private void OnAddTemporaryCardClick(object sender, RoutedEventArgs e)
 		{
-			NotificationCard.CardType type = (NotificationCard.CardType)(_cardNumber % 4);
+			var type = (NotificationCardBase.CardType)(_cardNumber % 4);
 			NotificationPanel.AddTextCard("Card " + _cardNumber++, type, 2000);
+		}
+
+		private void OnAddButtonCardClick(object sender, RoutedEventArgs e)
+		{
+			var type = (NotificationCardBase.CardType)(_cardNumber % 4);
+			NotificationPanel.AddButtonCard("Card " + _cardNumber++, type);
 		}
 	}
 }

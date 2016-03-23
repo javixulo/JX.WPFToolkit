@@ -3,33 +3,34 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media.Imaging;
-using JXWPFToolkit.Controls.NotificationPanel;
+using JXWPFToolkit.Controls.NotificationPanel.NotificationCards;
 
 namespace JXWPFToolkit.Converters
 {
 	public class TypeToImageConverter : IValueConverter
 	{
 		private ResourceDictionary _resources;
+
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			if (_resources == null)
 				_resources = new ResourceDictionary { Source = new Uri("/JXWPFToolkit;component/Dictionaries/NotificationPanelDictionary.xaml", UriKind.RelativeOrAbsolute) };
 
-			NotificationCard.CardType type;
+			NotificationCardBase.CardType type;
 			Enum.TryParse(value.ToString(), true, out type);
 
 			switch (type)
 			{
-				case NotificationCard.CardType.None:
+				case NotificationCardBase.CardType.None:
 					break;
 
-				case NotificationCard.CardType.Info:
+				case NotificationCardBase.CardType.Info:
 					return (BitmapImage)_resources["ImageInfo"];
 
-				case NotificationCard.CardType.Warning:
+				case NotificationCardBase.CardType.Warning:
 					return (BitmapImage)_resources["ImageWarning"];
 
-				case NotificationCard.CardType.Error:
+				case NotificationCardBase.CardType.Error:
 					return _resources["ImageError"];
 				default:
 					throw new ArgumentOutOfRangeException();
@@ -48,11 +49,10 @@ namespace JXWPFToolkit.Converters
 	{
 		public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
-
-			NotificationCard.CardType type;
+			NotificationCardBase.CardType type;
 			Enum.TryParse(value.ToString(), true, out type);
 
-			return type == NotificationCard.CardType.None ? Visibility.Collapsed : Visibility.Visible;
+			return type == NotificationCardBase.CardType.None ? Visibility.Collapsed : Visibility.Visible;
 		}
 
 		public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
