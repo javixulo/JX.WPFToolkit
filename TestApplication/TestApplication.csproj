@@ -98,7 +98,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\JXWPFToolkit\JX.WPFToolkit.csproj">
+    <ProjectReference Include="..\JX.WPFToolkit\JX.WPFToolkit.csproj">
       <Project>{a2326a27-6db7-4438-927c-98f724677a1c}</Project>
       <Name>JX.WPFToolkit</Name>
     </ProjectReference>
