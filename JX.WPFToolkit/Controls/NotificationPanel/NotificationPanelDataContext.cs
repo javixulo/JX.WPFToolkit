@@ -1,10 +1,10 @@
 ﻿using System;
-using System.ComponentModel;
 using System.Windows;
+using JX.WPFToolkit.Helpers;
 
 namespace JX.WPFToolkit.Controls.NotificationPanel
 {
-	public class NotificationPanelDataContext : INotifyPropertyChanged
+	public class NotificationPanelDataContext : ViewModelBase
 	{
 		private Visibility _visibility;
 		public CardCollection Cards { get; set; }
@@ -18,7 +18,7 @@ namespace JX.WPFToolkit.Controls.NotificationPanel
 			set
 			{
 				_visibility = value;
-				NotifyPropertyChanged("Visibility");
+				RaisePropertyChanged("Visibility");
 			}
 		}
 
@@ -33,17 +33,5 @@ namespace JX.WPFToolkit.Controls.NotificationPanel
 		{
 			Visibility = Visibility.Visible;
 		}
-
-		#region INotifyPropertyChanged
-
-		public event PropertyChangedEventHandler PropertyChanged;
-
-		private void NotifyPropertyChanged(string propertyName)
-		{
-			if (PropertyChanged != null)
-				PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
-
-		#endregion
 	}
 }
