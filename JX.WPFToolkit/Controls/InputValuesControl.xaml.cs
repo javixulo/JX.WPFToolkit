@@ -77,13 +77,14 @@ namespace JX.WPFToolkit.Controls
 		{
 			Control control;
 
-			if (item.DataType == typeof(bool))
+			if (item.DataType == typeof (bool))
 			{
 				control = new CheckBox { IsChecked = (bool)item.Value };
 				((CheckBox)control).Checked += OnValueChanged;
 				((CheckBox)control).Unchecked += OnValueChanged;
+				control.HorizontalAlignment = HorizontalAlignment.Right;
 			}
-			else if (item.DataType == typeof(Int32) || item.DataType == typeof(Int16))
+			else if (item.DataType == typeof (Int32) || item.DataType == typeof (Int16))
 			{
 				control = new IntegerUpDown { Value = item.Value == null ? 0 : Convert.ToInt32(item.Value), FormatString = item.Format };
 				((IntegerUpDown)control).ValueChanged += OnValueChanged;
@@ -99,9 +100,8 @@ namespace JX.WPFToolkit.Controls
 					binding.NotifyOnTargetUpdated = true;
 					binding.ValidationRules.Add(new RequiredFieldValidationRule());
 				}
-
 			}
-			else if (item.DataType == typeof(Int64))
+			else if (item.DataType == typeof (Int64))
 			{
 				control = new LongUpDown { Value = item.Value == null ? 0 : Convert.ToInt64(item.Value), FormatString = item.Format };
 				((LongUpDown)control).ValueChanged += OnValueChanged;
@@ -118,7 +118,7 @@ namespace JX.WPFToolkit.Controls
 					binding.ValidationRules.Add(new RequiredFieldValidationRule());
 				}
 			}
-			else if (item.DataType == typeof(double))
+			else if (item.DataType == typeof (double))
 			{
 				control = new DoubleUpDown { Value = item.Value == null ? 0 : (double)item.Value };
 				((DoubleUpDown)control).ValueChanged += OnValueChanged;
@@ -135,12 +135,12 @@ namespace JX.WPFToolkit.Controls
 					binding.ValidationRules.Add(new RequiredFieldValidationRule());
 				}
 			}
-			//else if (item.DataType == typeof (decimal))
-			//{
-			//    control = new DecimalUpDown { Value = item.Value == null ? 0 : (decimal)item.Value, FormatString = item.Format };
-			//    ((DecimalUpDown)control).ValueChanged += OnValueChanged;
-			//}
-			else if (item.DataType == typeof(DateTime))
+				//else if (item.DataType == typeof (decimal))
+				//{
+				//    control = new DecimalUpDown { Value = item.Value == null ? 0 : (decimal)item.Value, FormatString = item.Format };
+				//    ((DecimalUpDown)control).ValueChanged += OnValueChanged;
+				//}
+			else if (item.DataType == typeof (DateTime))
 			{
 				control = new DateTimePicker { Value = item.Value == null ? DateTime.Today : (DateTime)item.Value, Format = DateTimeFormat.Custom, TimeFormatString = item.Format, FormatString = item.Format };
 				((DateTimePicker)control).ValueChanged += OnValueChanged;
@@ -156,11 +156,10 @@ namespace JX.WPFToolkit.Controls
 					binding.NotifyOnTargetUpdated = true;
 					binding.ValidationRules.Add(new RequiredFieldValidationRule());
 				}
-
 			}
-			else if (item.DataType == typeof(IEnumerable<ComboBoxItem>))
+			else if (item.DataType == typeof (IEnumerable<ComboBoxItem>))
 			{
-				IEnumerable<ComboBoxItem> items = (IEnumerable<ComboBoxItem>)item.Value;
+				var items = (IEnumerable<ComboBoxItem>)item.Value;
 				int selectedIndex = items.FindIndex(x => x.IsSelected);
 				control = new ComboBox { ItemsSource = items, SelectedIndex = selectedIndex };
 				((ComboBox)control).SelectionChanged += OnValueChanged;
@@ -186,6 +185,7 @@ namespace JX.WPFToolkit.Controls
 			}
 
 			control.VerticalAlignment = VerticalAlignment.Center;
+
 			control.Tag = item;
 			control.IsEnabled = !item.ReadOnly;
 
@@ -256,15 +256,15 @@ namespace JX.WPFToolkit.Controls
 
 			string text = (control as TextBox).Text;
 
-			if (item.DataType == typeof(int))
+			if (item.DataType == typeof (int))
 				return string.IsNullOrEmpty(text) ? (int)0 : Convert.ToInt32(text);
-			if (item.DataType == typeof(Int64))
+			if (item.DataType == typeof (Int64))
 				return string.IsNullOrEmpty(text) ? (Int64)0 : Convert.ToInt64(text);
-			if (item.DataType == typeof(double))
+			if (item.DataType == typeof (double))
 				return string.IsNullOrEmpty(text) ? (double)0 : Convert.ToDouble(text);
-			if (item.DataType == typeof(decimal))
+			if (item.DataType == typeof (decimal))
 				return string.IsNullOrEmpty(text) ? (decimal)0 : Convert.ToDecimal(text);
-			if (item.DataType == typeof(DateTime))
+			if (item.DataType == typeof (DateTime))
 				return DateTime.ParseExact(text, item.Format, null);
 
 
@@ -328,7 +328,7 @@ namespace JX.WPFToolkit.Controls
 			public InputItem(string id)
 			{
 				Id = GetValidId(id);
-				DataType = typeof(string);
+				DataType = typeof (string);
 			}
 
 			private static string GetValidId(string id)

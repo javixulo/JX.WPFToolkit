@@ -67,20 +67,23 @@ namespace JX.WPFToolkit.Windows
 			switch (size)
 			{
 				case WindowSize.Small:
-					Height = 300;
-					Width = 350;
+					Height = 350;
+					Width = 300;
 					break;
 				case WindowSize.Medium:
-					Height = 400;
-					Width = 450;
+					Height = 450;
+					Width = 400;
 					break;
 				case WindowSize.Large:
-					Height = 500;
-					Width = 550;
+					Height = 700;
+					Width = 600;
 					break;
 				default:
 					throw new ArgumentOutOfRangeException("size");
 			}
+
+			MinWidth = 300;
+			MinHeight = 300;
 
 			if (orientation == Orientation.Horizontal)
 			{

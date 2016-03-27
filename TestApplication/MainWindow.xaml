@@ -5,6 +5,10 @@
         xmlns:wpfToolkit="clr-namespace:JX.WPFToolkit;assembly=JX.WPFToolkit"
         Title="Sample usage" Height="500" Width="600">
 
+	<Window.Resources>
+		<ResourceDictionary Source="/JX.WPFToolkit;component/Dictionaries/BaseDictionary.xaml" />
+	</Window.Resources>
+	
 	<Grid Background="White">
 
 		<Grid.RowDefinitions>

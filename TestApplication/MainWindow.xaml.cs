@@ -21,74 +21,27 @@ namespace TestApplication
 			var items = new List<InputValuesControl.InputItem>
 			{
 				// normal controls
-				new InputValuesControl.InputItem("Normal int")
+				new InputValuesControl.InputItem("Normal int") { DataType = typeof (int), Label = "Normal int: ", Value = 1 },
+				new InputValuesControl.InputItem("Normal string") { DataType = typeof (string), Label = "Normal string: ", Value = "some text" },
+				new InputValuesControl.InputItem("Normal DateTime") { DataType = typeof (DateTime), Label = "Normal DateTime: ", Value = DateTime.Now },
+				new InputValuesControl.InputItem("Normal bool") { DataType = typeof (bool), Label = "Normal bool: ", Value = true },
+				new InputValuesControl.InputItem("Normal double") { DataType = typeof (double), Label = "Normal double: ", Value = 1.5 },
+				new InputValuesControl.InputItem("Normal list of values")
 				{
-					DataType = typeof (int),
-					Label = "Normal int: ",
-					Value = 1
-				},
-				new InputValuesControl.InputItem("Normal string")
-				{
-					DataType = typeof (string),
-					Label = "Normal string: ",
-					Value = "some text"
-				},
-				new InputValuesControl.InputItem("Normal DateTime")
-				{
-					DataType = typeof (DateTime),
-					Label = "Normal DateTime: ",
-					Value = DateTime.Now
-				},
-				new InputValuesControl.InputItem("Normal bool")
-				{
-					DataType = typeof (bool),
-					Label = "Normal bool: ",
-					Value = true
-				},
-				new InputValuesControl.InputItem("Normal double")
-				{
-					DataType = typeof (double),
-					Label = "Normal double: ",
-					Value = 1.5
+					DataType = typeof (IEnumerable<ComboBoxItem>),
+					Label = "Normal list of values: ",
+					Value = new List<ComboBoxItem> { new ComboBoxItem { Content = "value 1" }, new ComboBoxItem { Content = "value 2", IsSelected = true }, new ComboBoxItem { Content = "value 3" } }
 				},
 				// required
-				new InputValuesControl.InputItem("Normal string")
-				{
-					DataType = typeof (string),
-					Label = "Required string: ",
-					Required = true
-				},
+				new InputValuesControl.InputItem("Normal string") { DataType = typeof (string), Label = "Required string: ", Required = true },
 				// readonly
-				new InputValuesControl.InputItem("Readonly string")
-				{
-					DataType = typeof (string),
-					Label = "Readonly string: ",
-					ReadOnly = true
-				},
-				new InputValuesControl.InputItem("Readonly int")
-				{
-					DataType = typeof (int),
-					Label = "Readonly int: ",
-					ReadOnly = true,
-					Value = 1
-				},
-				new InputValuesControl.InputItem("Formated date")
-				{
-					DataType = typeof (DateTime),
-					Label = "Formated date: ",
-					Value = DateTime.Now,
-					Format = "dd/MM/yyyy"
-				},
-				new InputValuesControl.InputItem("Formated int")
-				{
-					DataType = typeof (int),
-					Label = "Formated int: ",
-					Value = 1,
-					Format = "#.00"
-				}
+				new InputValuesControl.InputItem("Readonly string") { DataType = typeof (string), Label = "Readonly string: ", ReadOnly = true },
+				new InputValuesControl.InputItem("Readonly int") { DataType = typeof (int), Label = "Readonly int: ", ReadOnly = true, Value = 1 },
+				new InputValuesControl.InputItem("Formated date") { DataType = typeof (DateTime), Label = "Formated date: ", Value = DateTime.Now, Format = "dd/MM/yyyy" },
+				new InputValuesControl.InputItem("Formated int") { DataType = typeof (int), Label = "Formated int: ", Value = 1, Format = "#.00" }
 			};
 
-			InputValuesWindow window = new InputValuesWindow(items, WindowSize.Medium, Orientation.Vertical, 2);
+			InputValuesWindow window = new InputValuesWindow(items, WindowSize.Large, Orientation.Horizontal, 2);
 			window.InputFinished += OnInputFinished;
 			window.Show();
 		}

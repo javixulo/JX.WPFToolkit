@@ -50,7 +50,328 @@
 	</Style>
 
 	<Style BasedOn="{StaticResource StyleBaseControl}" TargetType="Window" />
-	<Style BasedOn="{StaticResource StyleBaseControl}" TargetType="Button" />
+
+	<Style BasedOn="{StaticResource StyleBaseControl}" TargetType="Button" x:Key="ButtonDefault" >
+		<Setter Property="Margin" Value="10"/>
+		<Setter Property="Padding" Value="10, 0"/>
+		<Setter Property="Height" Value="25"/>
+		<Setter Property="Background" Value="GhostWhite"/>
+		<Setter Property="BorderBrush" Value="{StaticResource BrushFieldBorder}"/>
+		<Setter Property="BorderThickness" Value="1"/>
+		<Setter Property="Foreground" Value="Black"/>
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type Button}" >
+					<Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+						<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Margin="{TemplateBinding Padding}" />
+					</Border>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+
+		<Style.Triggers>
+			<Trigger Property="IsMouseOver" Value="True" >
+				<Setter Property="Background" Value="DarkGray"/>
+			</Trigger>
+
+			<Trigger Property="IsPressed" Value="True" >
+				<Setter Property="Background" Value="DimGray"/>
+			</Trigger>
+		</Style.Triggers>
+
+	</Style>
+
+	<Style BasedOn="{StaticResource ButtonDefault}" TargetType="Button" />
+
+	<Style BasedOn="{StaticResource ButtonDefault}" TargetType="Button" x:Key="ButtonPrimary" >
+		<Setter Property="Background" Value="#0D78AA"/>
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="BorderThickness" Value="0"/>
+
+		<Style.Triggers>
+			<Trigger Property="IsMouseOver" Value="True" >
+				<Setter Property="Background" Value="#00648E"/>
+			</Trigger>
+			<Trigger Property="IsPressed" Value="True" >
+				<Setter Property="Background" Value="#00436A"/>
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style BasedOn="{StaticResource ButtonDefault}" TargetType="Button" x:Key="ButtonConfirmation" >
+		<Setter Property="Background" Value="#5D9834"/>
+		<Setter Property="Foreground" Value="White"/>
+		<Setter Property="BorderThickness" Value="0"/>
+
+		<Style.Triggers>
+			<Trigger Property="IsMouseOver" Value="True" >
+				<Setter Property="Background" Value="#4E802B"/>
+			</Trigger>
+			<Trigger Property="IsPressed" Value="True" >
+				<Setter Property="Background" Value="#3F6922"/>
+			</Trigger>
+		</Style.Triggers>
+	</Style>
+
+	<Style x:Key="ComboBoxToggleButton" TargetType="ToggleButton" BasedOn="{StaticResource StyleBaseControl}">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ToggleButton">
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition />
+							<ColumnDefinition Width="25" />
+						</Grid.ColumnDefinitions>
+						<Border
+                          x:Name="Border"
+                          Grid.ColumnSpan="2"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}" />
+						<Border
+                          Grid.Column="0"
+                          Background="Transparent"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}" />
+						<Path
+                          x:Name="Arrow"
+                          Grid.Column="1"    
+                          Fill="Gray"
+                          Stroke="Gray"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+						  Data="M 0 0 L 3 3 L 6 0 Z"/>
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter TargetName="Border" Property="Background" Value="LightGray" />
+							<Setter TargetName="Border" Property="BorderBrush" Value="Gray" />
+							<Setter Property="Foreground" Value="Gray"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<ControlTemplate x:Key="ComboBoxTextBox" TargetType="TextBox">
+		<Border x:Name="PART_ContentHost" Focusable="True" />
+	</ControlTemplate>
+
+	<Style TargetType="{x:Type ComboBox}" BasedOn="{StaticResource StyleBaseControl}">
+		<Setter Property="Background" Value="White" />
+		<Setter Property="BorderBrush" Value="{StaticResource BrushFieldBorder}" />
+		<Setter Property="Margin" Value="10"/>
+		<Setter Property="SnapsToDevicePixels" Value="true"/>
+		<Setter Property="OverridesDefaultStyle" Value="true"/>
+		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+		<Setter Property="ScrollViewer.CanContentScroll" Value="true"/>
+		<Setter Property="Height" Value="25"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ComboBox">
+					<Grid>
+						<ToggleButton
+                                Name="ToggleButton"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                Background="{TemplateBinding Background}"
+                            Foreground="{TemplateBinding Foreground}"
+                                Style="{StaticResource ComboBoxToggleButton}"
+                                Grid.Column="2"
+                                Focusable="false"
+                                IsChecked="{Binding Path=IsDropDownOpen,Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                                ClickMode="Press" />
+						<ContentPresenter
+                                Name="ContentSite"
+                                IsHitTestVisible="False"
+                                Content="{TemplateBinding SelectionBoxItem}"
+                                ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
+                                ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
+                                Margin="10,3,30,3"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center" />
+						<TextBox x:Name="PART_EditableTextBox"
+                                Template="{StaticResource ComboBoxTextBox}"
+                                VerticalAlignment="Center"
+								 HorizontalAlignment="Stretch"
+                                Margin="3,3,23,3"
+                                Focusable="True"                               
+                                Visibility="Hidden"
+                                IsReadOnly="{TemplateBinding IsReadOnly}"/>
+						<Popup
+                                Name="Popup"
+                                Placement="Bottom"
+                                IsOpen="{TemplateBinding IsDropDownOpen}"
+                                AllowsTransparency="True"
+                                Focusable="False"
+                                PopupAnimation="Slide">
+							<Grid
+                                  Name="DropDown"
+                                  MinWidth="{TemplateBinding ActualWidth}"
+                                  MaxHeight="{TemplateBinding MaxDropDownHeight}">
+								<Border
+                                        x:Name="DropDownBorder"
+                                        Background="White"
+                                        BorderThickness="1"
+                                        BorderBrush="{TemplateBinding BorderBrush}"/>
+								<ScrollViewer Margin="4,6,4,6" SnapsToDevicePixels="True">
+									<StackPanel IsItemsHost="True" KeyboardNavigation.DirectionalNavigation="Contained" />
+								</ScrollViewer>
+							</Grid>
+						</Popup>
+
+					</Grid>
+					<ControlTemplate.Triggers>
+						<Trigger Property="HasItems" Value="false">
+							<Setter TargetName="DropDownBorder" Property="MinHeight" Value="50"/>
+						</Trigger>
+						<Trigger Property="IsGrouping" Value="true">
+							<Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+						</Trigger>
+						<Trigger SourceName="Popup" Property="Popup.AllowsTransparency" Value="true">
+							<Setter TargetName="DropDownBorder" Property="Margin" Value="0,2,0,0"/>
+						</Trigger>
+						<Trigger Property="IsEditable" Value="true">
+							<Setter Property="IsTabStop" Value="false"/>
+							<Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible"/>
+							<Setter TargetName="ContentSite" Property="Visibility" Value="Hidden"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="{x:Type ComboBoxItem}" BasedOn="{StaticResource StyleBaseControl}">
+		<Setter Property="SnapsToDevicePixels" Value="true" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="VerticalAlignment" Value="Center" />
+		<Setter Property="OverridesDefaultStyle" Value="true"/>
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ComboBoxItem">
+					<Border
+                        Name="Border"
+						Padding="7,0,0,0"
+						BorderThickness="1"
+						Background="{TemplateBinding Background}"
+						BorderBrush="{TemplateBinding BorderBrush}" >
+
+						<TextBlock Name="Text" TextAlignment="Left" Height="18" VerticalAlignment="Center">
+							<ContentPresenter />
+						</TextBlock>
+					</Border>
+
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsHighlighted" Value="true">
+							<Setter TargetName="Border" Property="Background" Value="{StaticResource DetailColorBrush}"/>
+							<Setter TargetName="Text" Property="Foreground" Value="White"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="CheckBoxSwitch" TargetType="{x:Type CheckBox}" BasedOn="{StaticResource StyleBaseControl}">
+		<Setter Property="Height" Value="25"/>
+		<Setter Property="Width" Value="80"/>
+		<Setter Property="Margin" Value="10"/>
+		
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="{x:Type CheckBox}">
+					<ControlTemplate.Resources>
+
+						<Storyboard x:Key="OnChecking">
+
+							<DoubleAnimationUsingKeyFrames BeginTime="0" Storyboard.TargetName="slider" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+								<SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="0"/>
+							</DoubleAnimationUsingKeyFrames>
+
+							<ColorAnimation BeginTime="00:00:00" Duration="00:00:00.1000000" Storyboard.TargetName="YesText" Storyboard.TargetProperty="Color" To="White" />
+							<ColorAnimation BeginTime="00:00:00" Duration="00:00:00.1000000" Storyboard.TargetName="NoText" Storyboard.TargetProperty="Color" To="Black" />
+
+						</Storyboard>
+
+						<Storyboard x:Key="OnUnchecking">
+
+							<DoubleAnimationUsingKeyFrames BeginTime="0" Storyboard.TargetName="slider" Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)">
+								<SplineDoubleKeyFrame KeyTime="00:00:00.1000000" Value="40"/>
+							</DoubleAnimationUsingKeyFrames>
+
+							<ColorAnimation BeginTime="00:00:00" Duration="00:00:00.1000000" Storyboard.TargetName="YesText" Storyboard.TargetProperty="Color" To="Black" />
+							<ColorAnimation BeginTime="00:00:00" Duration="00:00:00.1000000" Storyboard.TargetName="NoText" Storyboard.TargetProperty="Color" To="White" />
+
+						</Storyboard>
+
+					</ControlTemplate.Resources>
+
+					<DockPanel x:Name="dockPanel">
+						<ContentPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+										  Content="{TemplateBinding Content}" 
+										  ContentStringFormat="{TemplateBinding ContentStringFormat}" 
+										  ContentTemplate="{TemplateBinding ContentTemplate}" 
+										  RecognizesAccessKey="True" 
+										  VerticalAlignment="Center"
+										  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"/>
+						<Border BorderBrush="{StaticResource BrushFieldBorder}" Background="White" BorderThickness="1"  Margin="0" Width="80">
+							<Grid>
+								<Border HorizontalAlignment="Left" x:Name="slider" Width="40"  RenderTransformOrigin="0.5,0.5" Background="{StaticResource DetailColorBrush}">
+									<Border.RenderTransform>
+										<TransformGroup>
+											<ScaleTransform ScaleX="1" ScaleY="1"/>
+											<SkewTransform AngleX="0" AngleY="0"/>
+											<RotateTransform Angle="0"/>
+											<TranslateTransform X="0" Y="0"/>
+										</TransformGroup>
+									</Border.RenderTransform>
+								</Border>
+
+								<TextBlock Margin="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Text="Yes">
+									<TextBlock.Foreground >
+										<SolidColorBrush x:Name="YesText" Color="Gray" />
+									</TextBlock.Foreground>
+								</TextBlock>
+								<TextBlock Margin="0,0,10,0" HorizontalAlignment="Right" VerticalAlignment="Center" Text="No" >
+									<TextBlock.Foreground >
+										<SolidColorBrush  x:Name="NoText" Color="Gray" />
+									</TextBlock.Foreground>
+								</TextBlock>
+
+							</Grid>
+						</Border>
+					</DockPanel>
+
+					<ControlTemplate.Triggers>
+						<Trigger Property="IsChecked" Value="True">
+							<Trigger.ExitActions>
+								<BeginStoryboard Storyboard="{StaticResource OnUnchecking}" />
+							</Trigger.ExitActions>
+							<Trigger.EnterActions>
+								<BeginStoryboard Storyboard="{StaticResource OnChecking}"/>
+							</Trigger.EnterActions>
+						</Trigger>
+
+						<Trigger Property="IsChecked" Value="False">
+							<Trigger.ExitActions>
+								<BeginStoryboard Storyboard="{StaticResource OnChecking}" />
+							</Trigger.ExitActions>
+							<Trigger.EnterActions>
+								<BeginStoryboard Storyboard="{StaticResource OnUnchecking}"/>
+							</Trigger.EnterActions>
+						</Trigger>
+
+						<Trigger Property="IsEnabled" Value="False">
+							<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+						</Trigger>
+					</ControlTemplate.Triggers>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
 	<Style BasedOn="{StaticResource StyleBaseControl}" TargetType="TextBox" x:Key="StyleTextBox" >
 		<Setter Property="BorderBrush" Value="{StaticResource BrushFieldBorder}" />
@@ -62,6 +383,10 @@
 		<Setter Property="VerticalContentAlignment" Value="Center" />
 
 		<Style.Triggers>
+
+			<Trigger Property="IsFocused" Value="True">
+				<Setter Property="Background" Value="{StaticResource BrushFieldFocusedBackground}"/>
+			</Trigger>
 
 			<Trigger Property="IsReadOnly" Value="True">
 				<Setter Property="Background" Value="#FFF0F0F0"/>
