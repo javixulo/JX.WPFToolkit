@@ -8,7 +8,7 @@
 	<Window.Resources>
 		<ResourceDictionary Source="/JX.WPFToolkit;component/Dictionaries/BaseDictionary.xaml" />
 	</Window.Resources>
-	
+
 	<Grid Background="White">
 
 		<Grid.RowDefinitions>
@@ -22,10 +22,10 @@
 		<Button Grid.Row="0" Content="Input Values Window" Click="InputValuesWindowClick"/>
 
 		<StackPanel Grid.Row="2">
-		<Label Content="Notification Panel actions:"/>
+			<Label Content="Notification Panel actions:"/>
 			<StackPanel  Orientation="Horizontal">
-				<Button Content="Add Card" Click="OnAddCardClick"/>
-				<Button Content="Add Temporary Card" Click="OnAddTemporaryCardClick"/>
+				<Button Content="Add Card" Click="OnAddCardClick" Style="{StaticResource ButtonPrimary}"/>
+				<Button Content="Add Temporary Card" Click="OnAddTemporaryCardClick" Style="{StaticResource ButtonSecondary}"/>
 				<Button Content="Add Button Card" Click="OnAddButtonCardClick"/>
 			</StackPanel>
 		</StackPanel>

@@ -12,14 +12,21 @@
 	<Color x:Key="DetailColor">#FF4D75FF</Color>
 	<Color x:Key="DetailColorLight">#FFD3EDFF</Color>
 
+	<Color x:Key="SecondaryDetailColorDark">#C7CE14</Color>
+	<Color x:Key="SecondaryDetailColor">#D5DC1A</Color>
+	<Color x:Key="SecondaryDetailColorLight">#E3EA20</Color>
+
 	<SolidColorBrush x:Key="BrushValidationErrorBorder" Color="DarkRed"/>
 	<SolidColorBrush x:Key="BrushFieldBorder" Color="#cccccc"/>
 	<SolidColorBrush x:Key="BrushFieldFocusedBackground" Color="{StaticResource DetailColorLight}"/>
 	<SolidColorBrush x:Key="MainColorBrush" Color="{StaticResource MainColor}"/>
 	<SolidColorBrush x:Key="MainColorDarkBrush" Color="{StaticResource MainColorDark}"/>
 	<SolidColorBrush x:Key="DetailColorBrush" Color="{StaticResource DetailColor}"/>
-	<SolidColorBrush x:Key="DetailColorDarkBrush" Color="DarkSlateBlue"/>
+	<SolidColorBrush x:Key="DetailColorDarkBrush" Color="{StaticResource DetailColorDark}"/>
 	<SolidColorBrush x:Key="DetailColorLightBrush" Color="{StaticResource DetailColorLight}"/>
+	<SolidColorBrush x:Key="SecondaryDetailColorBrush" Color="{StaticResource SecondaryDetailColor}"/>
+	<SolidColorBrush x:Key="SecondaryDetailColorDarkBrush" Color="{StaticResource SecondaryDetailColorDark}"/>
+	<SolidColorBrush x:Key="SecondaryDetailColorLightBrush" Color="{StaticResource SecondaryDetailColorLight}"/>
 	<SolidColorBrush x:Key="LightGrayBrush" Color="{StaticResource MainColorLight}"/>
 
 	<!-- EndRegion -->
@@ -85,31 +92,31 @@
 	<Style BasedOn="{StaticResource ButtonDefault}" TargetType="Button" />
 
 	<Style BasedOn="{StaticResource ButtonDefault}" TargetType="Button" x:Key="ButtonPrimary" >
-		<Setter Property="Background" Value="#0D78AA"/>
+		<Setter Property="Background" Value="{StaticResource DetailColorBrush}"/>
 		<Setter Property="Foreground" Value="White"/>
 		<Setter Property="BorderThickness" Value="0"/>
 
 		<Style.Triggers>
 			<Trigger Property="IsMouseOver" Value="True" >
-				<Setter Property="Background" Value="#00648E"/>
+				<Setter Property="Background" Value="{StaticResource DetailColorDarkBrush}"/>
 			</Trigger>
 			<Trigger Property="IsPressed" Value="True" >
-				<Setter Property="Background" Value="#00436A"/>
+				<Setter Property="Background" Value="{StaticResource DetailColorDarkBrush}"/>
 			</Trigger>
 		</Style.Triggers>
 	</Style>
 
-	<Style BasedOn="{StaticResource ButtonDefault}" TargetType="Button" x:Key="ButtonConfirmation" >
-		<Setter Property="Background" Value="#5D9834"/>
+	<Style BasedOn="{StaticResource ButtonDefault}" TargetType="Button" x:Key="ButtonSecondary" >
+		<Setter Property="Background" Value="{StaticResource SecondaryDetailColorBrush}"/>
 		<Setter Property="Foreground" Value="White"/>
 		<Setter Property="BorderThickness" Value="0"/>
 
 		<Style.Triggers>
 			<Trigger Property="IsMouseOver" Value="True" >
-				<Setter Property="Background" Value="#4E802B"/>
+				<Setter Property="Background" Value="{StaticResource SecondaryDetailColorDarkBrush}"/>
 			</Trigger>
 			<Trigger Property="IsPressed" Value="True" >
-				<Setter Property="Background" Value="#3F6922"/>
+				<Setter Property="Background" Value="{StaticResource SecondaryDetailColorDarkBrush}"/>
 			</Trigger>
 		</Style.Triggers>
 	</Style>
@@ -279,7 +286,7 @@
 		<Setter Property="Height" Value="25"/>
 		<Setter Property="Width" Value="80"/>
 		<Setter Property="Margin" Value="10"/>
-		
+
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type CheckBox}">
