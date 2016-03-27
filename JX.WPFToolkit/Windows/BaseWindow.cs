@@ -18,13 +18,14 @@ using HorizontalAlignment = System.Windows.HorizontalAlignment;
 using Orientation = System.Windows.Controls.Orientation;
 using Panel = System.Windows.Controls.Panel;
 
-namespace JX.WPFToolkit
+namespace JX.WPFToolkit.Windows
 {
 	public class BaseWindow : Window
 	{
-		private Button _maxRestoreButton;
-		private ResourceDictionary _resources;
+		protected ResourceDictionary ResourceDictionary;
 
+		private Button _maxRestoreButton;
+		
 		public static readonly DependencyProperty ButtonAreaProperty = DependencyProperty.Register("ButtonArea", typeof(object), typeof(ContentControl));
 
 		public object ButtonArea
@@ -74,7 +75,7 @@ namespace JX.WPFToolkit
 		/// <summary>
 		/// TitleBar_MouseDown - Drag if single-click, resize if double-click
 		/// </summary>
-		private void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
+		protected void OnTitleBarMouseDown(object sender, MouseButtonEventArgs e)
 		{
 			if (e.ChangedButton == MouseButton.Left)
 				if (e.ClickCount == 2)
@@ -87,35 +88,35 @@ namespace JX.WPFToolkit
 				}
 		}
 
-		private void OnCloseButtonClick(object sender, RoutedEventArgs e)
+		protected void OnCloseButtonClick(object sender, RoutedEventArgs e)
 		{
 			Close();
 		}
 
-		private void OnMaximizeRestoreButtonClick(object sender, RoutedEventArgs e)
+		protected void OnMaximizeRestoreButtonClick(object sender, RoutedEventArgs e)
 		{
 			AdjustWindowSize();
 		}
 
-		private void OnMinimizeButtonClick(object sender, RoutedEventArgs e)
+		protected void OnMinimizeButtonClick(object sender, RoutedEventArgs e)
 		{
 			WindowState = WindowState.Minimized;
 		}
 
-		private void OnMaximizeRestoreButtonLoaded(object sender, RoutedEventArgs e)
+		protected void OnMaximizeRestoreButtonLoaded(object sender, RoutedEventArgs e)
 		{
 			_maxRestoreButton = sender as Button;
 		}
 
-		private void OnStateChanged(object sender, EventArgs e)
+		protected void OnStateChanged(object sender, EventArgs e)
 		{
 			switch (WindowState)
 			{
 				case WindowState.Normal:
-					((Image)_maxRestoreButton.Content).Source = (BitmapImage)_resources["ImageMaximizeWindow"];
+					((Image)_maxRestoreButton.Content).Source = (BitmapImage)ResourceDictionary["ImageMaximizeWindow"];
 					break;
 				case WindowState.Maximized:
-					((Image)_maxRestoreButton.Content).Source = (BitmapImage)_resources["ImageRestoreWindow"];
+					((Image)_maxRestoreButton.Content).Source = (BitmapImage)ResourceDictionary["ImageRestoreWindow"];
 					break;
 			}
 		}
@@ -265,6 +266,45 @@ namespace JX.WPFToolkit
 
 		#endregion
 
+		public virtual FrameworkElementFactory GetWindowButtons()
+		{
+			FrameworkElementFactory stackPanel = new FrameworkElementFactory(typeof(StackPanel));
+			stackPanel.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
+			stackPanel.SetValue(MarginProperty, new Thickness(5, 2, 5, 2));
+
+			var minButton = new FrameworkElementFactory(typeof(Button));
+
+			minButton.SetValue(StyleProperty, ResourceDictionary["StyleButtonWindowTitle"]);
+			minButton.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(OnMinimizeButtonClick));
+
+			var buttonImage = new FrameworkElementFactory(typeof(Image));
+			buttonImage.SetValue(Image.SourceProperty, ResourceDictionary["ImageMinimizeWindow"]);
+			minButton.AppendChild(buttonImage);
+
+			stackPanel.AppendChild(minButton);
+
+			var maxButton = new FrameworkElementFactory(typeof(Button));
+			maxButton.SetValue(StyleProperty, ResourceDictionary["StyleButtonWindowTitle"]);
+			maxButton.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(OnMaximizeRestoreButtonClick));
+			maxButton.AddHandler(LoadedEvent, new RoutedEventHandler(OnMaximizeRestoreButtonLoaded));
+
+			buttonImage = new FrameworkElementFactory(typeof(Image));
+			buttonImage.SetValue(Image.SourceProperty, ResourceDictionary["ImageMaximizeWindow"]);
+			maxButton.AppendChild(buttonImage);
+			stackPanel.AppendChild(maxButton);
+
+			var closeButton = new FrameworkElementFactory(typeof(Button));
+			closeButton.SetValue(StyleProperty, ResourceDictionary["StyleButtonWindowTitle"]);
+			closeButton.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(OnCloseButtonClick));
+
+			buttonImage = new FrameworkElementFactory(typeof(Image));
+			buttonImage.SetValue(Image.SourceProperty, ResourceDictionary["ImageCloseWindow"]);
+			closeButton.AppendChild(buttonImage);
+			stackPanel.AppendChild(closeButton);
+
+			return stackPanel;
+		}
+
 		#region private helpers
 
 		private void AdjustWindowSize()
@@ -277,13 +317,13 @@ namespace JX.WPFToolkit
 
 		private void InitializeComponent()
 		{
-			_resources = new ResourceDictionary { Source = new Uri("/JX.WPFToolkit;component/Dictionaries/BaseDictionary.xaml", UriKind.RelativeOrAbsolute) };
+			ResourceDictionary = new ResourceDictionary { Source = new Uri("/JX.WPFToolkit;component/Dictionaries/BaseDictionary.xaml", UriKind.RelativeOrAbsolute) };
 
 			var template = new ControlTemplate();
 
 			var border = new FrameworkElementFactory(typeof(Border));
 			border.SetValue(Border.BorderThicknessProperty, new Thickness(2));
-			border.SetValue(Border.BorderBrushProperty, _resources["MainColorBrush"]);
+			border.SetValue(Border.BorderBrushProperty, ResourceDictionary["MainColorBrush"]);
 			border.SetValue(Border.CornerRadiusProperty, new CornerRadius(5));
 
 			var outerGrid = GetOuterGrid();
@@ -336,7 +376,7 @@ namespace JX.WPFToolkit
 		{
 			var innerGrid = new FrameworkElementFactory(typeof(Grid));
 			innerGrid.SetValue(Grid.RowProperty, 0);
-			innerGrid.SetValue(Panel.BackgroundProperty, _resources["MainColorBrush"]);
+			innerGrid.SetValue(Panel.BackgroundProperty, ResourceDictionary["MainColorBrush"]);
 
 			int columnIndex = 0;
 
@@ -394,40 +434,8 @@ namespace JX.WPFToolkit
 			columnDef.SetValue(ColumnDefinition.WidthProperty, GridLength.Auto);
 			innerGrid.AppendChild(columnDef);
 
-			var stackPanel = new FrameworkElementFactory(typeof(StackPanel));
+			FrameworkElementFactory stackPanel = GetWindowButtons();
 			stackPanel.SetValue(Grid.ColumnProperty, columnIndex);
-			stackPanel.SetValue(StackPanel.OrientationProperty, Orientation.Horizontal);
-			stackPanel.SetValue(MarginProperty, new Thickness(5, 2, 5, 2));
-
-			var minButton = new FrameworkElementFactory(typeof(Button));
-
-			minButton.SetValue(StyleProperty, _resources["StyleButtonWindowTitle"]);
-			minButton.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(OnMinimizeButtonClick));
-
-			var buttonImage = new FrameworkElementFactory(typeof(Image));
-			buttonImage.SetValue(Image.SourceProperty, _resources["ImageMinimizeWindow"]);
-			minButton.AppendChild(buttonImage);
-
-			stackPanel.AppendChild(minButton);
-
-			var maxButton = new FrameworkElementFactory(typeof(Button));
-			maxButton.SetValue(StyleProperty, _resources["StyleButtonWindowTitle"]);
-			maxButton.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(OnMaximizeRestoreButtonClick));
-			maxButton.AddHandler(LoadedEvent, new RoutedEventHandler(OnMaximizeRestoreButtonLoaded));
-
-			buttonImage = new FrameworkElementFactory(typeof(Image));
-			buttonImage.SetValue(Image.SourceProperty, _resources["ImageMaximizeWindow"]);
-			maxButton.AppendChild(buttonImage);
-			stackPanel.AppendChild(maxButton);
-
-			var closeButton = new FrameworkElementFactory(typeof(Button));
-			closeButton.SetValue(StyleProperty, _resources["StyleButtonWindowTitle"]);
-			closeButton.AddHandler(ButtonBase.ClickEvent, new RoutedEventHandler(OnCloseButtonClick));
-
-			buttonImage = new FrameworkElementFactory(typeof(Image));
-			buttonImage.SetValue(Image.SourceProperty, _resources["ImageCloseWindow"]);
-			closeButton.AppendChild(buttonImage);
-			stackPanel.AppendChild(closeButton);
 
 			// Add all elements in order
 
